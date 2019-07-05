@@ -17,7 +17,11 @@ attr_reader :entry_station, :exit_station
 
   def finish(exit_station)
     @exit_station = exit_station
-    @complete = true if @entry_station
+    @complete = true if @entry_station != nil
+  end
+
+  def fare
+    complete? ? Oystercard::MINIMUM_FARE : Oystercard::PENALTY_FARE
   end
 
   def complete?

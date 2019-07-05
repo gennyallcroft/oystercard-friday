@@ -4,7 +4,8 @@ describe Oystercard do
 
   let(:entry_station) { double :entry_station}
   let(:exit_station) { double :exit_station}
-  let(:journey1) { double :journey, start: nil, finish: nil, entry_station: 'Victoria', exit_station: 'Aldgate East' }
+  let(:journey1) { double :journey, fare: 1, complete?: true, start: nil, finish: nil, entry_station: 'Victoria', exit_station: 'Aldgate East' }
+  let(:journey1_penalty) { double :journey, fare: 6, complete?: false, start: nil, finish: nil, entry_station: 'Victoria', exit_station: 'Aldgate East' }
 
   describe '#top_up' do
 
@@ -40,17 +41,12 @@ describe Oystercard do
 
     it 'deducts the penalty fare if the user has not touched in' do
       subject.top_up(10)
-      expect{ subject.touch_out(exit_station, journey1) }.to change{ subject.balance }.by(-Oystercard::PENALTY_FARE)
+      expect{ subject.touch_out(exit_station, journey1_penalty) }.to change{ subject.balance }.by(-Oystercard::PENALTY_FARE)
     end
   end
 
   describe '#touch_in' do
 
-     it 'returns penalty fare of 6 if start journey twice' do
-       subject.top_up 10
-       subject.touch_in(entry_station, journey1)
-       expect{ subject.touch_in(entry_station, journey1) }.to change{ subject.balance }.by(-Oystercard::PENALTY_FARE)
-     end
      it 'starts new journey' do
        subject.top_up 10
        subject.touch_in(entry_station, journey1)
