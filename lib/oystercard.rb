@@ -5,8 +5,7 @@ class Oystercard
 
   DEFAULT_BALANCE = 0
   MAXIMUM_BALANCE = 90
-  MINIMUM_BALANCE = 1
-  MINIMUM_CHARGE = 1
+  MINIMUM_FARE = 1
   PENALTY_FARE = 6
 
   attr_reader :balance, :journeys
@@ -20,22 +19,26 @@ class Oystercard
     raise("Maximum limit of #{MAXIMUM_BALANCE} exceded") if @balance + amount > MAXIMUM_BALANCE
     @balance += amount
     puts "Topped up £#{amount}. New balance: £#{@balance}"
-    return @balance
+    @balance
   end
 
   def touch_in
-    raise("Insufficient funds") if @balance < MINIMUM_BALANCE
+    raise("Insufficient funds") if @balance < MINIMUM_FARE
+    deduct_penalty_fare
     @journey = Journey.new
     @journey.start(@journey.entry_station)
-    deduct_fare
-    puts "Penalty fare of £6 deducted. You will be refunded on touch out"
   end
 
   def touch_out
-    @journey.finish(@journey.exit_station)
-    @journeys << {entry_station: @journey.entry_station, exit_station: @journey.exit_station}
-    deduct_fare
-    puts "Journey complete. Minimum fare of £1 deducted. Penalty fare refunded. New balance #{balance}"
+    if !@journey
+      deduct_minimum_fare
+    else
+      @journey.finish(@journey.exit_station)
+      @journeys << {entry_station: @journey.entry_station, exit_station: @journey.exit_station}
+      @journey = nil
+      deduct_minimum_fare
+      puts "Journey complete. Minimum fare of £1 deducted. New balance #{balance}"
+    end
   end
 
   def journey
@@ -44,13 +47,12 @@ class Oystercard
 
   private
 
-  def deduct_fare
-    if !@journey.complete?
-      @balance -= Oystercard::PENALTY_FARE
-    elsif @journey.complete?
-      @balance += Oystercard::PENALTY_FARE
-      @balance -= Oystercard::MINIMUM_CHARGE
-    end
+  def deduct_penalty_fare
+    @balance -= Oystercard::PENALTY_FARE if @journey
+  end
+
+  def deduct_minimum_fare
+    @balance -= Oystercard::MINIMUM_FARE if !@journey
   end
 end
 

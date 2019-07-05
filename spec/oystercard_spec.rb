@@ -28,7 +28,7 @@ describe Oystercard do
     it 'deduct_fares the minimum fare from the balance after a complete journey' do
       subject.top_up 10
       subject.touch_in
-      expect{ subject.touch_out }.to change{ subject.balance }.by(5)
+      expect{ subject.touch_out }.to change{ subject.balance }.by(-Oystercard::MINIMUM_FARE)
     end
 
     it 'stores journey in journeys variable' do
@@ -37,12 +37,17 @@ describe Oystercard do
       subject.touch_out
       expect(subject.journeys.length).to eq 1
     end
+
+    it 'deducts the penalty fare if the user has not touched in' do
+      subject.top_up(10)
+      expect{ subject.touch_out }.to change{ subject.balance }.by(-Oystercard::MINIMUM_FARE)
+    end
   end
 
   describe '#touch_in' do
 
        it 'returns penalty fare of 6 if start journey twice' do
-         subject.top_up(10)
+         subject.top_up 10
          subject.touch_in
          expect{ subject.touch_in }.to change{ subject.balance }.by(-Oystercard::PENALTY_FARE)
        end

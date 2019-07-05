@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/student/Projects/oystercard/spec/journey_spec.rb": [
+      "/Users/student/Documents/projects/oystercard/spec/journey_spec.rb": [
         1,
         null,
         1,
@@ -46,7 +46,7 @@
         null,
         null
       ],
-      "/Users/student/Projects/oystercard/lib/oystercard.rb": [
+      "/Users/student/Documents/projects/oystercard/lib/oystercard.rb": [
         1,
         1,
         null,
@@ -56,20 +56,19 @@
         1,
         1,
         1,
+        null,
         1,
         null,
         1,
+        8,
+        8,
+        null,
         null,
         1,
         7,
-        7,
-        null,
-        null,
-        1,
         6,
-        5,
-        5,
-        5,
+        6,
+        6,
         null,
         null,
         1,
@@ -77,14 +76,18 @@
         4,
         4,
         4,
-        4,
         null,
         null,
         1,
+        3,
+        1,
+        null,
         2,
         2,
         2,
         2,
+        2,
+        null,
         null,
         null,
         1,
@@ -94,18 +97,17 @@
         1,
         null,
         1,
-        6,
         4,
-        2,
-        2,
-        2,
         null,
+        null,
+        1,
+        3,
         null,
         null,
         null,
         1
       ],
-      "/Users/student/Projects/oystercard/lib/journey.rb": [
+      "/Users/student/Documents/projects/oystercard/lib/journey.rb": [
         null,
         null,
         1,
@@ -129,11 +131,11 @@
         null,
         null,
         1,
-        11,
+        3,
         null,
         null
       ],
-      "/Users/student/Projects/oystercard/spec/oystercard_spec.rb": [
+      "/Users/student/Documents/projects/oystercard/spec/oystercard_spec.rb": [
         1,
         null,
         1,
@@ -174,6 +176,11 @@
         1,
         null,
         null,
+        1,
+        1,
+        4,
+        null,
+        null,
         null,
         1,
         null,
@@ -186,7 +193,7 @@
         null,
         null
       ],
-      "/Users/student/Projects/oystercard/spec/station_spec.rb": [
+      "/Users/student/Documents/projects/oystercard/spec/station_spec.rb": [
         1,
         null,
         1,
@@ -202,7 +209,7 @@
         null,
         null
       ],
-      "/Users/student/Projects/oystercard/lib/station.rb": [
+      "/Users/student/Documents/projects/oystercard/lib/station.rb": [
         1,
         null,
         1,
@@ -214,6 +221,6 @@
         null
       ]
     },
-    "timestamp": 1562316894
+    "timestamp": 1562319989
   }
 }
